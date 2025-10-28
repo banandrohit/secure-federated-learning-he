@@ -1,0 +1,6 @@
+flask
+requests
+numpy
+scikit-learn
+torch
+tenseal
