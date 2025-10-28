@@ -80,6 +80,17 @@ def post_decrypted():
     data = request.get_json()
     PLAINTEXT_AGG = data.get('plaintext_aggregate')
     return jsonify({'status': 'plaintext_stored'})
+@app.route("/")
+def home():
+    return """
+    <h2>✅ Secure Federated Learning Aggregator is Live!</h2>
+    <p>Use endpoints like:</p>
+    <ul>
+      <li><a href="/get_context">/get_context</a></li>
+      <li><a href="/list_uploads">/list_uploads</a></li>
+      <li><a href="/get_plain_aggregate">/get_plain_aggregate</a></li>
+    </ul>
+    """
 
 @app.route('/get_plain_aggregate', methods=['GET'])
 def get_plain_aggregate():
