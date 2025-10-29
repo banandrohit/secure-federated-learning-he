@@ -15,6 +15,7 @@
 
 from flask import Flask, request, jsonify
 import base64, pickle, threading
+import os
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # 20 MB limit
@@ -103,4 +104,6 @@ def get_plain_aggregate():
 
 if __name__ == '__main__':
     print('Aggregator HE demo server starting on http://0.0.0.0:5000')
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
