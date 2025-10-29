@@ -17,7 +17,7 @@ from flask import Flask, request, jsonify
 import base64, pickle, threading
 
 app = Flask(__name__)
-
+app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # 20 MB limit
 # Stored objects (in-memory for demo)
 PUBLIC_CONTEXT_BYTES = None  # bytes (serialized TenSEAL context WITHOUT secret key)
 CIPHERTEXTS = []             # list of serialized ciphertexts (bytes)
