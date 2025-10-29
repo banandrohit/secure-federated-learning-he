@@ -41,6 +41,9 @@ def get_public_context():
     if PUBLIC_CONTEXT_BYTES is None:
         return jsonify({'status': 'no_context'}), 404
     return jsonify({'context': base64.b64encode(PUBLIC_CONTEXT_BYTES).decode('ascii')})
+@app.route('/get_context', methods=['GET'])
+def get_context_alias():
+    return get_public_context()
 
 @app.route('/upload_enc', methods=['POST'])
 def upload_enc():
