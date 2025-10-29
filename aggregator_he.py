@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 import base64, os
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # 20 MB limit
+app.config['MAX_CONTENT_LENGTH'] = 1000 * 1024 * 1024  # 20 MB limit
 
 # In-memory storage (for demo)
 PUBLIC_CONTEXT_BYTES = None
