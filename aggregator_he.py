@@ -101,9 +101,13 @@ def get_plain_aggregate():
     if PLAINTEXT_AGG is None:
         return jsonify({'status': 'no_plaintext'}), 404
     return jsonify({'status': 'ok', 'plaintext_aggregate': PLAINTEXT_AGG})
+@app.route('/ping')
+def ping():
+    return jsonify({'status': 'ok', 'message': 'Aggregator is running!'})
 
 if __name__ == '__main__':
-    print('Aggregator HE demo server starting on http://0.0.0.0:5000')
-    app.run(host='0.0.0.0', port=5000)
-    #app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get('PORT', 5000))
+    print(f'🚀 Aggregator HE demo server starting on port {port}...')
+    app.run(host='0.0.0.0', port=port)
+
 
