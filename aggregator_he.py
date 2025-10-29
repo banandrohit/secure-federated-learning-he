@@ -29,12 +29,13 @@ PLAINTEXT_AGG = None        # decrypted plaintext aggregate (sent by keyholder)
 def init_public_context():
     global PUBLIC_CONTEXT_BYTES
     data = request.get_json()
-    PUBLIC_CONTEXT_BYTES = base64.b64decode(data['context'].encode('ascii'))
-    # reset stored updates
-    global CIPHERTEXTS, AGG_CIPHERTEXT, PLAINTEXT_AGG
-    CIPHERTEXTS = []
-    AGG_CIPHERTEXT = None
-    PLAINTEXT_AGG = None
+    ctx_b64 = data.get('context')
+    if not ctx_b64:
+        return jsonify({'status': 'error', 'msg': 'missing context'}), 400
+    PUBLIC_CONTEXT_BYTES = base64.b64decode(ctx_b64.encode('ascii'))
+    # Also save to disk for persistence
+    with open('public_context.ctx', 'wb') as f:
+        f.write(PUBLIC_CONTEXT_BYTES)
     return jsonify({'status': 'public_context_saved'})
 
 @app.route('/get_public_context', methods=['GET'])
